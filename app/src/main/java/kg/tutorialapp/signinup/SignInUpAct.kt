@@ -20,6 +20,13 @@ class SignInUpAct: AppCompatActivity() {
 
         signState = intent.getStringExtra(Constance.SIGN_STATE)!!
 
+        if (signState == Constance.SIGN_IN_STATE){
+
+            bindingClass.edName.visibility = View.GONE
+            bindingClass.edFirstName.visibility = View.GONE
+            bindingClass.edSecondName.visibility = View.GONE
+            bindingClass.bAvatar.visibility = View.INVISIBLE
+        }
     }
 
     fun onClickDone(v: View) {
@@ -35,6 +42,17 @@ class SignInUpAct: AppCompatActivity() {
             if (bindingClass.imAvatar.isVisible) intent.putExtra(Constance.AVATAR_ID, R.drawable.profil)
             setResult(Activity.RESULT_OK, intent)
             finish()
+
+        } else if (signState == Constance.SIGN_IN_STATE){
+
+            intent.putExtra(Constance.LOGIN, bindingClass.edLogin.text.toString())
+            intent.putExtra(Constance.PASSWORD, bindingClass.edPassword.text.toString())
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
+    }
+
+    fun onClickAvatar(v:View){
+        bindingClass.imAvatar.visibility = View.VISIBLE
     }
 }
